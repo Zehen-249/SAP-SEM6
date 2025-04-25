@@ -53,9 +53,9 @@ else:
 print("RIGHT-SIDED TEST")
 # Alternate Hypothesis Ha: q > 0.5
 print("Z-test")
-z_left = (x_bar - 0.5) / np.sqrt((myu * (1 - myu)) / n)
+z_right = (x_bar - 0.5) / np.sqrt((myu * (1 - myu)) / n)
 print(f"Z-value: {z_two}")
-if z_left > 1.645:
+if z_right > 1.645:
     print("Reject the null hypothesis (evidence that coin is biased for heads).")
 else:
     print("Fail to reject the null hypothesis (no strong evidence that coin is biased for heads).")
