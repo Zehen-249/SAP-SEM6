@@ -14,25 +14,16 @@ def coutFreq(pair,X_,Y_):
             count+=1
     return count
 
-def print_table(data):
-    # Extract unique row (X) and column (Y) values
-    rows = sorted(set(k[0] for k in data.keys()))
-    cols = sorted(set(k[1] for k in data.keys()))
 
-    # Print header row
-    print("X|Y", end="")  
-    for col in cols:
-        print(f"{col:5}", end="")  # Adjust width
-    print()
+def createDF(X,Y):
+    data = {}
+    for i in X:
+        for j in Y:
+            data[(i,j)] = 0
 
-    # Print rows with values
-    for row in rows:
-        print(f"{row:2} ", end="")  # Row label
-        for col in cols:
-            print(f"{data.get((row, col), 0):5}", end="")  # Fill missing values with 0
-        print()
+    for pair,freq in data.items():
+        data[pair] = coutFreq(pair,X,Y)/N
 
-def createDF(data):
     rows = sorted(set(k[0] for k in data.keys()))
     cols = sorted(set(k[1] for k in data.keys()))
 
@@ -44,45 +35,24 @@ def createDF(data):
     return df
 
 N=1000  #No. of pairs
-# X_real = np.random.randint(0,50,N)
-# Y_real = np.random.randint(50,100,N)
-
-X_real = np.random.poisson(lam = 5,size = N)
-Y_real = np.random.binomial(p=0.5,n=10,size =N)
-# print(X_real)
-# print(Y_real)
-# print("")
-
-data = {}
-for i in X_real:
-
-    for j in Y_real:
-        data[(i,j)] = 0
-
-# for i,j in data.items():
-#     print(i,j)
-
-for pair,freq in data.items():
-    data[pair] = coutFreq(pair,X_real,Y_real)/N
-    # print(f"{pair} | {data[pair]}")
-
+X_dis = np.random.poisson(lam = 5,size = N)
+Y_dis = np.random.binomial(p=0.5,n=10,size =N)
     
-# print_table(data)
-df_real = createDF(data)
-# df_real["marginal Prob of X"] = df_real.sum(axis=1)
-# df_real.loc["marginal Prob of Y"] = df_real.sum(axis=0)
-print(df_real)
+df_dis = createDF(X_dis,Y_dis)
 
-df_real = df_real.apply(pd.to_numeric)
+# df_dis["marginal Prob of X"] = df_dis.sum(axis=1)
+# df_dis.loc["marginal Prob of Y"] = df_dis.sum(axis=0)
+print(df_dis)
 
+df_dis = df_dis.apply(pd.to_numeric)
 
-plt.figure(figsize=(6, 5))  # Set figure size
-sns.heatmap(df_real, annot=True, cmap="coolwarm", fmt=".3f", linewidths=0)
-
+plt.figure(figsize=(6, 5)) 
+sns.heatmap(df_dis, annot=True, cmap="coolwarm", fmt=".3f", linewidths=0)
 
 plt.xlabel("Y-Axis Values")
 plt.ylabel("X-Axis Values")
 plt.title("Heatmap of Data")
 
+plt.tight_layout()
 
 plt.show()

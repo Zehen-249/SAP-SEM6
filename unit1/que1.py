@@ -1,6 +1,3 @@
-"""
-@copyright Riya pandey (thoda sa)
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -29,9 +26,10 @@ def plot_distribution_with_clt(N: int, M: int, plot_num: list, dist: str = 'norm
         axs[plot_num[0],plot_num[1]].legend()
 
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
-plot_distribution_with_clt(N=50, M=1000,plot_num=[0,0], dist="normal", param=(50,0.5)) 
-plot_distribution_with_clt(N=50, M=1000,plot_num=[0,1], dist="poisson", param=(50,)) 
-plot_distribution_with_clt(N=100, M=10000,plot_num=[1,0], dist="binomial", param=(10,0.2)) 
-plot_distribution_with_clt(N=30, M=1000,plot_num=[1,1], dist="cauchy", param=(10,)) 
+fig.suptitle(f'N = {100} and N = {1000}', fontsize=16)
+plot_distribution_with_clt(N=100, M=1000,plot_num=[0,0], dist="normal", param=(50,0.5)) 
+plot_distribution_with_clt(N=100, M=1000,plot_num=[0,1], dist="poisson", param=(50,)) 
+plot_distribution_with_clt(N=100, M=1000,plot_num=[1,0], dist="binomial", param=(10,0.2)) 
+plot_distribution_with_clt(N=100, M=1000,plot_num=[1,1], dist="cauchy", param=(10,)) 
 plt.tight_layout()
 plt.show()

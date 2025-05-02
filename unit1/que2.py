@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-
 def coutFreq(pair,X_,Y_):
     x=pair[0]
     y = pair[1]
@@ -13,22 +12,6 @@ def coutFreq(pair,X_,Y_):
         if X_[i]==x and Y_[i]==y:
             count+=1
     return count
-
-def print_table(data):
-
-    rows = sorted(set(k[0] for k in data.keys()))
-    cols = sorted(set(k[1] for k in data.keys()))
-
-    print("X|Y", end="")  
-    for col in cols:
-        print(f"{col:5}", end="")  
-    print()
-
-    for row in rows:
-        print(f"{row:2} ", end="")  
-        for col in cols:
-            print(f"{data.get((row, col), 0):5}", end="")  
-        print()
 
 def createDF(data):
     rows = sorted(set(k[0] for k in data.keys()))
